@@ -1,0 +1,11 @@
+TEMPLATES:
+- layout 
+- home 
+- login 
+- register 
+- admin
+    - consultProduct
+    - createProfuct 
+    - editProduct
+    - "supprimer" user
+- 404

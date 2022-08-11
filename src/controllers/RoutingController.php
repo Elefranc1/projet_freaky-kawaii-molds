@@ -33,7 +33,6 @@ class RoutingController
     public function matchRoute(string $route = "homescreen", array $get, array $post = null) : void
     {
         $existingRoutes = $this->pageManager->getAllPagesRoutes();
-        var_dump($existingRoutes);
         
         $found = false;
         

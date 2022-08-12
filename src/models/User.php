@@ -29,7 +29,7 @@ abstract class User
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
-        $this->isAdmin = 0;
+        $this->isAdmin = 0; //On ne pourra pas créer de User Admin
     }
     
     /**

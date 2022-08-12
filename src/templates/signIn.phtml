@@ -1,0 +1,44 @@
+<?php
+require './src/templates/layout.phtml';   
+
+?>
+
+<form action="/" method="post">
+  <div class="container">
+    <h1>Se connecter</h1>
+    <p>Veuillez remplir ce formulaire afin de créer votre propre compte utilisateur.</p>
+    <hr>
+    <div>
+    <label for="pseudonyme">Pseudonyme <span>*</span></label>
+    <input type="text" placeholder="Pseudonyme" name="username" required>
+    </div>
+    
+    <div>
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Email" name="email" required>
+    </div>
+    
+    <div>
+    <label for="password"><b>Mot de passe</b></label>
+    <input type="password" placeholder="Mot de passe" name="password" required>
+    </div>
+  
+    <div>
+    <label for="password-repeat"><b>Confirmation Mot de passe</b></label>
+    <input type="password" placeholder="Confirmation Mot de passe" name="password-repeat" required>
+    </div>
+    
+    <div>
+    <label>
+      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
+    </label>
+    </div>
+    <p>En créant votre compte Freaky Kawaii Molds, vous acceptez nos <a href="#" style="color:dodgerblue">Conditions d'utilisation</a> 
+    et notre <a href="#" style="color:dodgerblue">Politique de confidentialité</a>.</p>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>

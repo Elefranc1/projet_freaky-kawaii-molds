@@ -1,0 +1,49 @@
+<?php
+require './src/templates/layout.phtml';   
+
+?>
+
+<!-- 
+  TO DO : ENLEVER LE STYLE INLINE SUR LES LIENS DE TERMES CONFIDENTIALITE et les asterisques
+-->
+
+
+<form action="/ProjetFinal/projet_freaky-kawaii-molds/" method="post">
+  <div class="container">
+    <h1>S'inscrire</h1>
+    <p>Veuillez remplir tous les champs de ce formulaire afin de créer votre propre compte utilisateur.</p>
+    <hr>
+    <div>
+    <label for="pseudonyme">Pseudonyme</label>
+    <input type="text" placeholder="Pseudonyme" name="username" required>
+    </div>
+    
+    <div>
+    <label for="email">Email</label>
+    <input type="text" placeholder="Email" name="email" required>
+    </div>
+    
+    <div>
+    <label for="password">Mot de passe</label>
+    <input type="password" placeholder="Mot de passe" name="password" required>
+    </div>
+  
+    <div>
+    <label for="password-repeat">Confirmation Mot de Passe</label>
+    <input type="password" placeholder="Confirmation Mot de passe" name="password-repeat" required>
+    </div>
+    
+    <div>
+    <label>
+      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Se souvenir de moi
+    </label>
+    </div>
+    <p>En créant votre compte Freaky Kawaii Molds, vous acceptez nos <a href="#" style="color:dodgerblue">Conditions d'utilisation</a> 
+    et notre <a href="#" style="color:dodgerblue">Politique de confidentialité</a>.</p>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>

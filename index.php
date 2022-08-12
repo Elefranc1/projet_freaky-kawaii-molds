@@ -1,18 +1,29 @@
 <?php
-    require "./src/controllers/RoutingController.php";
-    
-    $routing = new RoutingController();
-    
-    //Si une route a été définie dans l'url
-    if(isset($_GET["route"]))
+/**
+ * @author : Gaellan
+ */
+
+require "autoload.php";
+
+try {
+
+    $router = new Router();
+
+    if(isset($_GET['path']))
     {
-        //on charge la page correspondante en envoyant toutes les infos en POST et GET
-        $routing->matchRoute($_GET["route"], $_GET, $_POST);
+        $request = "/".$_GET['path'];
     }
     else
     {
-        //Sinon, on charge la page d'accueil par défaut
-        $routing->matchRoute("homescreen", $_GET);   
+        $request = "/";
     }
-    
-?>
+
+    $router->route($routes, $request);
+}
+catch(Exception $e)
+{
+    if($e->getCode() === 404)
+    {
+        require "./templates/404.phtml";
+    }
+}

@@ -11,4 +11,14 @@
 </head>
 
 <body>
-    <div class="main">
+<?php
+
+//We don't display the header and navbar when we are on the signIn or signUp form
+if(!(isset($_GET['path']) && 
+(  $_GET['path']==='signIn' 
+|| $_GET['path']==='signUp')))
+{
+require './src/templates/header.phtml';
+require './src/templates/NavigationHeader.phtml';
+}
+?>

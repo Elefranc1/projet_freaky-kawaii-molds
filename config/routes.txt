@@ -1,0 +1,6 @@
+/ HomescreenController:index
+/page1 AuthenticationController:testPage
+/signIn AuthenticationController:signIn
+/signUp AuthenticationController:signUp
+/product ProductController:index
+/product/* ProductController:show

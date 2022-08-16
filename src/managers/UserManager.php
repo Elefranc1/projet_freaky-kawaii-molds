@@ -45,7 +45,22 @@ class UserManager extends DBConnect
         'email' => $email
         ];
         $query->execute($parameters);
-        $playerArray = $query->fetchAll(PDO::FETCH_ASSOC);
+        $userArray = $query->fetchAll(PDO::FETCH_ASSOC);
         return;
+    }
+
+    public function getUserByEmail(string $email) : ?User
+    {
+        echo "<br>Je recherche un User!";
+        $query = $this->db->prepare("SELECT * FROM users WHERE email=:email");
+        $parameters = [
+        'email' => $email
+        ];
+         var_dump($query);
+        $query->execute($parameters);
+        $userArray = $query->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($userArray);
+        $user = new User('TEST NAME', 'TEST PWD', 'test@test.fr');
+        return $user;
     }
 }

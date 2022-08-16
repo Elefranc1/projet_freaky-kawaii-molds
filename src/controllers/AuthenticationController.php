@@ -3,7 +3,7 @@ require "./src/managers/UserManager.php";
 
 class AuthenticationController
 {
-    
+    //TO DO : testPage() A SUPPRIMER
     // function testPage() : void that will display the test page
     function testPage(array $get, array $post=null) : void
     {
@@ -16,10 +16,14 @@ class AuthenticationController
         //If signIn form has been previously sent...
         if(!empty($post)){
             //Variable initialization 
-            $username=$post['username'];
             $email=strip_tags($post['email']);
             $password=$post['password'];
             $userManager = new UserManager();
+            $userSearched=$userManager->getUserByEmail($email);
+            var_dump($userSearched);
+            
+            
+            
         }
         
         require './src/templates/signIn.phtml'; 

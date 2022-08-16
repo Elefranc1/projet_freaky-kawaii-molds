@@ -1,6 +1,6 @@
 <?php
 
-abstract class User
+ class User
 {
     protected int $id;
     
@@ -23,13 +23,13 @@ abstract class User
      * @param string $password
      * @param string email
      */
-    public function __construct(string $username, string $password, string $email)
+    public function __construct(string $username, string $password, string $email=null)
     {
         //$this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
-        $this->isAdmin = 0; //On ne pourra pas créer de User Admin
+        $this->isAdmin = 0; // We cannot create admins form the website
     }
     
     /**

@@ -2,8 +2,17 @@
 /**
  * @author : Gaellan
  */
-
+session_start();
 require "autoload.php";
+
+
+//TEST
+
+// if(!empty($_POST)){
+//     var_dump($_POST);
+// }
+
+//END TEST
 
 try {
 

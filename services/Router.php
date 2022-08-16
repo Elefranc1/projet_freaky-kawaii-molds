@@ -51,7 +51,7 @@ class Router {
                     $routeFound = true;
 
                     $ctrl = new $controller();
-                    $ctrl->$method();
+                    $ctrl->$method($_GET, $_POST);
                     }
             }
         }

@@ -4,6 +4,7 @@
  * @author : Elefranc1
  */
 
+require "./src/managers/DBConnect.php";
 require "./src/controllers/HomescreenController.php";
 require "./src/controllers/AuthenticationController.php";
 require "./services/Router.php";

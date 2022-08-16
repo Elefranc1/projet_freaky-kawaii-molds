@@ -16,7 +16,7 @@ abstract class User
     
     protected DateTime $birthdate;
 
-    protected boolean $isAmdin;
+    protected bool $isAmdin;
 
     /**
      * @param string $username

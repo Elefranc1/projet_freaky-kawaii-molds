@@ -7,6 +7,7 @@
 require "./src/managers/DBConnect.php";
 require "./src/controllers/HomescreenController.php";
 require "./src/controllers/AuthenticationController.php";
+require "./src/controllers/AdminPanelController.php";
 require "./services/Router.php";
 
 $routes = [];
@@ -26,9 +27,18 @@ if ($handle) { // if the file exists
 
         if(substr_count($route["path"], "/") > 1) // check if the path string has more than 1 "/"
         {
-            $route["parameter"] = true; // the route expects a parameter
-            $pathData = explode("/", $route["path"]); // divide the path in three strings (cut at the "/")
-            $route["path"] = "/".$pathData[1]; // isolate the path without the parameters
+            if(substr($route["path"],-1)=="*") // check if the last char of the path is "*", which represents a parameter
+            {
+
+                $route["parameter"] = true; // the route expects a parameter
+                $pathData = explode("/", $route["path"]); // divide the path in three strings (cut at the "/")
+                $route["path"] = substr($route["path"], 0, -2); // isolate the path without the parameters
+                
+            }
+            else
+            {
+                $route["parameter"] = false;
+            }
         }
         else
         {

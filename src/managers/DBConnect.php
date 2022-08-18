@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author : Elefranc1
+ */
 class DBConnect
     {
         protected PDO $db;

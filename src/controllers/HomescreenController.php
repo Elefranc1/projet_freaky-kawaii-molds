@@ -1,6 +1,6 @@
 <?php
 /**
- * @author : Gaellan
+ * @author : Elefranc1
  */
 
 class HomescreenController

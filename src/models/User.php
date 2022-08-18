@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author : Elefranc1
+ */
  class User
 {
     protected int $id;
@@ -23,13 +25,12 @@
      * @param string $password
      * @param string email
      */
-    public function __construct(string $username, string $password, string $email=null)
+    public function __construct(string $username, string $password, string $email)
     {
         //$this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
-        $this->isAdmin = 0; // We cannot create admins form the website
     }
     
     /**
@@ -154,9 +155,9 @@
     }
 
     /**
-     * @param bool $password
+     * @param bool $isAmdin
      */
-    public function setIsAdmin(bool $password): void
+    public function setIsAdmin(bool $isAmdin): void
     {
         $this->isAmdin = $isAmdin;
     }

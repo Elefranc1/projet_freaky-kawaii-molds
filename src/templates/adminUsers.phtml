@@ -1,0 +1,31 @@
+<?php
+require './src/templates/layout.phtml';   
+require './src/templates/adminPanel.phtml'; 
+?>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Pseudonyme</th>
+            <th>email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+<?php
+$userManager = new UserManager();
+$userArray= $userManager->getAllNonAdminUsers();
+
+for($i=0,$max=count($userArray);$i<$max;$i++){
+?>
+        <tr>
+            <td><?=$userArray[$i]['username']?></td>
+            <td><?=$userArray[$i]['email']?></td>
+            <td><a href="">Supprimer l'utilisateur</a></td>
+        </tr>
+    </tbody>
+<?php
+}
+?>
+</table>

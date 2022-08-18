@@ -2,22 +2,64 @@
 
 ?>
 <header>
-    <div class="logs">
-        <a class="signIn" href="signIn">
-            <p>Se connecter</p>
-        </a>
-    <div>
-        <a class="signUp" href="signUp">
-            <p>S'inscrire</p>
-        </a>
-    </div>
-    <div>
-        <a class="log-out" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-    </div>
-    <div class="logo">
-        <a href="index.php">
-
-        </a>
-    </div>
-    </div>
+    <?php
+    //If a user is online, we display his username. Else we display the links to the signIn and signUp forms
+            if(isset($_SESSION['user']))
+            {
+                echo $_SESSION['user']['username'];
+                echo "<br>";
+    ?>
+            <a class="logOut" href="homescreen">
+                <p>Se déconnecter</p>
+            </a>
+    <?php
+                if(($_SESSION['user']['is_admin'] == 1 ))
+                {
+    ?>
+                <a class='admin-panel' href='admin'>Panel admin</a>    
+                
+    <?php
+                }
+            
+    ?>
+                <!-- A EFFACER UNE FOIS LE LOGOUT TERMINE -->
+                <div class="logs">
+                    <a class="signIn" href="signIn">
+                        <p>Se connecter</p>
+                    </a>
+                </div>
+                <div>
+                    <a class="signUp" href="signUp">
+                        <p>S'inscrire</p>
+                    </a>
+                </div
+    <?php    
+                
+            }
+            else
+            {
+    ?>
+            <div class="logs">
+                    <a class="signIn" href="signIn">
+                        <p>Se connecter</p>
+                    </a>
+                <div>
+                    <a class="signUp" href="signUp">
+                        <p>S'inscrire</p>
+                    </a>
+                </div>
+                <div>
+                    <a class="log-out" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                </div>
+                <div class="logo">
+                    <a href="index.php">
+            
+                    </a>
+                </div>
+                </div>                
+                
+    <?php
+            }
+    ?>
+    
 </header>

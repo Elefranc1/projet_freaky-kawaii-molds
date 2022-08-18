@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author : Elefranc1
+ */
 require "./src/models/User.php";
 
 class AuthenticationManager

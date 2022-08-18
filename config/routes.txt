@@ -4,3 +4,6 @@
 /signUp AuthenticationController:signUp
 /product ProductController:index
 /product/* ProductController:show
+/admin AdminPanelController:index
+/admin/manageUser AdminPanelController:manageUser
+/manageUser AdminPanelController:manageUser

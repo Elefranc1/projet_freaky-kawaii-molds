@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author : Elefranc1
+ */
 require "./src/models/User.php";
 
 
@@ -9,6 +11,15 @@ class UserManager extends DBConnect
     public function getAllUsers() : ?array
     {
         $query = $this->db->prepare('SELECT * FROM users ');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
+    
+        public function getAllNonAdminUsers() : ?array // used ine the manageUser screen
+    {
+        $query = $this->db->prepare('SELECT * FROM users WHERE is_admin=0');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         
@@ -36,7 +47,6 @@ class UserManager extends DBConnect
     
     public function createNewUser(string $username, string $password, string $email) : void
     {
-        echo "<br>Je suis bien dans createNewUser !";
         $query = $this->db->prepare("INSERT INTO users( username, password, email, is_admin) 
         VALUES (:username,:password,:email,0)");
         $parameters = [
@@ -51,16 +61,20 @@ class UserManager extends DBConnect
 
     public function getUserByEmail(string $email) : ?User
     {
-        echo "<br>Je recherche un User!";
         $query = $this->db->prepare("SELECT * FROM users WHERE email=:email");
         $parameters = [
         'email' => $email
         ];
-         var_dump($query);
         $query->execute($parameters);
         $userArray = $query->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($userArray);
-        $user = new User('TEST NAME', 'TEST PWD', 'test@test.fr');
-        return $user;
+        if(!empty($userArray)){
+            $user = new User($userArray[0]['username'], $userArray[0]['password'], $userArray[0]['email']);
+            $user->setId($userArray[0]['id']);
+            $user->setIsAdmin($userArray[0]['is_admin']);
+            return $user;
+        }
+        else{
+           return null; 
+        }
     }
 }

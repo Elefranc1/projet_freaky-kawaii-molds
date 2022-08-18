@@ -4,7 +4,7 @@
  */
 session_start();
 require "autoload.php";
-
+var_dump($_SESSION);
 
 //TEST
 

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author : Elefranc1
+ */
 require "./src/managers/UserManager.php";
 
 class AuthenticationController
@@ -13,20 +16,51 @@ class AuthenticationController
     // function signIn() : void that will display the SignIn form
     function signIn(array $get, array $post=null) : void
     {
-        //If signIn form has been previously sent...
+        // If signIn form has been previously sent...
         if(!empty($post)){
-            //Variable initialization 
+            // Variable initialization 
+            $errorConnexion=false;
             $email=strip_tags($post['email']);
             $password=$post['password'];
             $userManager = new UserManager();
-            $userSearched=$userManager->getUserByEmail($email);
-            var_dump($userSearched);
+            $DBuser=$userManager->getUserByEmail($email);
+
+            // if a matching email has been found in the Database ...
+            if(!empty($DBuser)){
+                $DBUserPassword=$DBuser->getPassword();
+                // ... we check if the password matches.
+                // If the password matches, we go back to the homescreen and store the user infos in sesion
+                if(password_verify($password, $DBUserPassword)){
+                    $_GET['path']=null; // We set 'path'=NULL to display the nav and header again
+
+                        //we stock in $_SESSION relevant informations 
+                        $_SESSION["user"] = [
+                            "id" => $DBuser->getId(),
+                            "username" => $DBuser->getUsername(),
+                            "is_admin" => $DBuser->getIsAdmin()
+                        ];
+                    require "./src/templates/home_screen.phtml"; 
+                }
+                else{
+                // else we stay in the signIn form with an error message
+                $errorConnexion=true;
+                echo "<p class='error'>Email ou mot de passe invalide</p>";
+                require './src/templates/signIn.phtml'; 
+                }
             
+            }
             
+            else{
+                // else we stay in the signIn form with an error message
+                $errorConnexion=true;
+                echo "<p class='error'>Email ou mot de passe invalide</p>";
+                require './src/templates/signIn.phtml'; 
+            }
             
         }
-        
-        require './src/templates/signIn.phtml'; 
+        else{
+        require './src/templates/signIn.phtml';
+        }
     }
     
     // function signUp() : void function that is called when a user tries to sign up

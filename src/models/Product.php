@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author : Elefranc1
+ */
 abstract class User
 {
     protected int $id;

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author : Elefranc1
+ */
 require "./src/controllers/AuthenticationController.php";
 require "./src/managers/PageManager.php";
 

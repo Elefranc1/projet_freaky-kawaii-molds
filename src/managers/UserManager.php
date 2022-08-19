@@ -80,6 +80,27 @@ class UserManager extends DBConnect
         }
     }
     
+        public function getUserById(int $userId): ?User
+    {
+        $query = $this->db->prepare("SELECT * FROM users WHERE id=:id");
+        $parameters = [
+        'id' => $userId
+        ];
+        $query->execute($parameters);
+        $userArray = $query->fetchAll(PDO::FETCH_ASSOC);
+        if(!empty($userArray))
+        {
+            $user = new User($userArray[0]['username'], $userArray[0]['password'], $userArray[0]['email']);
+            $user->setId($userArray[0]['id']);
+            $user->setIsAdmin($userArray[0]['is_admin']);
+            return $user;
+        }
+        else
+        {
+           return null; 
+        }
+    }
+    
     public function deleteUserById(int $userId): void
     {
         // DELETE OR REAFFECT THE SONS FIRST
@@ -97,4 +118,6 @@ class UserManager extends DBConnect
         
         return;
     }
+    
+
 }

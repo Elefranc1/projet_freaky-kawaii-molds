@@ -3,6 +3,7 @@
 /signIn AuthenticationController:signIn
 /signUp AuthenticationController:signUp
 /logout AuthenticationController:logout
+/editUser UserController:editUser
 /admin AdminPanelController:index
 /admin/manageUser AdminPanelController:manageUser
 /product ProductController:index

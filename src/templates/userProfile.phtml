@@ -1,0 +1,45 @@
+<?php
+require './src/templates/layout.phtml';   
+
+?>
+
+
+<form action="/ProjetFinal/projet_freaky-kawaii-molds/editProfile" method="post">
+  <div class="container">
+    <h1>Votre profil utilisateur</h1>
+    <p>Veuillez remplir tous les champs de ce formulaire afin de créer votre propre compte utilisateur.</p>
+    <hr>
+    <div>
+    <label for="pseudonyme">Pseudonyme</label>
+    <input type="text" value=<?=$user->getUsername();?> name="username">
+    </div>
+    
+    <div>
+    <label for="email">Email</label>
+    <input type="text" value=<?=$user->getEmail();?> name="email">
+    </div>
+    
+    <div>
+    <label for="password">Mot de passe</label>
+    <input type="password" placeholder="Ancien Mot de passe" name="oldPassword">
+    </div>
+  
+    <div>
+    <label for="password">Nouveau Mot de passe</label>
+    <input type="password" placeholder="Nouveau Mot de passe" name="NewPassword">
+    </div>  
+    
+    <div>
+    <label for="password-repeat">Confirmation Nouveau Mot de Passe</label>
+    <input type="password" placeholder="Confirmation Nouveau Mot de passe" name="newPassword-repeat" required>
+    </div>
+    <p>En créant votre compte Freaky Kawaii Molds, vous acceptez nos <a href="#" style="color:dodgerblue">Conditions d'utilisation</a> 
+    et notre <a href="#" style="color:dodgerblue">Politique de confidentialité</a>.</p>
+
+    <div class="clearfix">
+      <!-- bouton CANCEL à refaire -->
+      <a href="index.php"><button type="button" class="cancelbtn">Cancel</button></a>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>

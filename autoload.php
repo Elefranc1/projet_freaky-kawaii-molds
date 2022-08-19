@@ -8,6 +8,7 @@ require "./src/managers/DBConnect.php";
 require "./src/controllers/HomescreenController.php";
 require "./src/controllers/AuthenticationController.php";
 require "./src/controllers/AdminPanelController.php";
+require "./src/controllers/UserController.php";
 require "./services/Router.php";
 
 $routes = [];
@@ -44,7 +45,7 @@ if ($handle) { // if the file exists
         {
             $route["parameter"] = false; // the route does not expect a parameter
         }
-
+        
         $controllerString = $routeData[1]; // the controller string is what was after the " ";
 
         $controllerData = explode(":", $controllerString); // divide the controller string in two strings (cut at the ":")

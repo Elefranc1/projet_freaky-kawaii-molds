@@ -2,8 +2,8 @@
 /page1 AuthenticationController:testPage
 /signIn AuthenticationController:signIn
 /signUp AuthenticationController:signUp
-/product ProductController:index
-/product/* ProductController:show
+/logout AuthenticationController:logout
 /admin AdminPanelController:index
 /admin/manageUser AdminPanelController:manageUser
-/manageUser AdminPanelController:manageUser
+/product ProductController:index
+/product/* ProductController:show

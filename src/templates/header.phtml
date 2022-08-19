@@ -9,14 +9,24 @@
                 echo $_SESSION['user']['username'];
                 echo "<br>";
     ?>
-            <a class="logOut" href="homescreen">
+            <!-- Change profile -->
+            <a  href='/ProjetFinal/projet_freaky-kawaii-molds/editProfile'>Modifier son profil</a>    
+ 
+            
+            <!-- Log out -->
+            <a class="logOut" href="/ProjetFinal/projet_freaky-kawaii-molds/homescreen">
+                <form action="/ProjetFinal/projet_freaky-kawaii-molds/logout" method="post">
+                <button type="submit" class="btnLink">Déconnexion</button>    
+                </form>
                 <p>Se déconnecter</p>
             </a>
     <?php
                 if(($_SESSION['user']['is_admin'] == 1 ))
                 {
-    ?>
-                <a class='admin-panel' href='admin'>Panel admin</a>    
+    ?>            
+                
+                <!-- Admin Pannel -->
+                <a class='admin-panel' href='/ProjetFinal/projet_freaky-kawaii-molds/admin'>Panel admin</a>    
                 
     <?php
                 }
@@ -24,12 +34,12 @@
     ?>
                 <!-- A EFFACER UNE FOIS LE LOGOUT TERMINE -->
                 <div class="logs">
-                    <a class="signIn" href="signIn">
+                    <a class="signIn" href="/ProjetFinal/projet_freaky-kawaii-molds/signIn">
                         <p>Se connecter</p>
                     </a>
                 </div>
                 <div>
-                    <a class="signUp" href="signUp">
+                    <a class="signUp" href="/ProjetFinal/projet_freaky-kawaii-molds/signUp">
                         <p>S'inscrire</p>
                     </a>
                 </div
@@ -40,11 +50,11 @@
             {
     ?>
             <div class="logs">
-                    <a class="signIn" href="signIn">
+                    <a class="signIn" href="/ProjetFinal/projet_freaky-kawaii-molds/signIn">
                         <p>Se connecter</p>
                     </a>
                 <div>
-                    <a class="signUp" href="signUp">
+                    <a class="signUp" href="/ProjetFinal/projet_freaky-kawaii-molds/signUp">
                         <p>S'inscrire</p>
                     </a>
                 </div>
@@ -52,7 +62,7 @@
                     <a class="log-out" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                 </div>
                 <div class="logo">
-                    <a href="index.php">
+                    <a href="/ProjetFinal/projet_freaky-kawaii-molds/index.php">
             
                     </a>
                 </div>

@@ -17,7 +17,7 @@ class UserManager extends DBConnect
         return $result;
     }
     
-        public function getAllNonAdminUsers() : ?array // used ine the manageUser screen
+        public function getAllNonAdminUsers() : ?array // used in the manageUser screen
     {
         $query = $this->db->prepare('SELECT * FROM users WHERE is_admin=0');
         $query->execute();
@@ -67,14 +67,34 @@ class UserManager extends DBConnect
         ];
         $query->execute($parameters);
         $userArray = $query->fetchAll(PDO::FETCH_ASSOC);
-        if(!empty($userArray)){
+        if(!empty($userArray))
+        {
             $user = new User($userArray[0]['username'], $userArray[0]['password'], $userArray[0]['email']);
             $user->setId($userArray[0]['id']);
             $user->setIsAdmin($userArray[0]['is_admin']);
             return $user;
         }
-        else{
+        else
+        {
            return null; 
         }
+    }
+    
+    public function deleteUserById(int $userId): void
+    {
+        // DELETE OR REAFFECT THE SONS FIRST
+        // Transfer every orders to the special user "DELETED_USER"
+        // ...
+        // Transfer every "good" review to the special user "DELETED_USER" 
+        // ...
+        // Delete every "bad" review
+        
+        $query = $this->db->prepare("DELETE FROM users WHERE id=:id");
+        $parameters = [
+        'id' => $userId
+        ];
+        $query->execute($parameters);
+        
+        return;
     }
 }

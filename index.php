@@ -4,9 +4,15 @@
  */
 session_start();
 require "autoload.php";
-var_dump($_SESSION);
+
+
 
 //TEST
+// if (!empty($_SESSION)){
+//     echo "SESSION DE " . $_SESSION['user']['username'] . " ACTIVE";
+//     var_dump($_SESSION);
+// }
+
 
 // if(!empty($_POST)){
 //     var_dump($_POST);
@@ -33,6 +39,9 @@ catch(Exception $e)
 {
     if($e->getCode() === 404)
     {
-        require "./templates/404.phtml";
+        require "./src/templates/404.phtml";
+        echo $e->getMessage();
     }
 }
+
+var_dump($_SESSION);

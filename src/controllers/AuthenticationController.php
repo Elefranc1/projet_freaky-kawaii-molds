@@ -154,7 +154,19 @@ class AuthenticationController
         }
     }
     
-    
+    // function logout() : void function that is called when a user tries to logout
+    function logout(array $get, array $post=null) : void
+    {
+        if(isset($_SESSION['user'])){
+            var_dump($_SESSION);
+            unset($_SESSION['user']);
+            var_dump($_SESSION);
+        }
+        
+        // we redirect the user who looged out to the homescreen
+        // require './src/templates/home_screen.phtml'; 
+        header('Location:/ProjetFinal/projet_freaky-kawaii-molds/');
+    }
 
     
 }

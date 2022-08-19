@@ -1,5 +1,4 @@
 <?php
-require './src/templates/layout.phtml';   
 require './src/templates/adminPanel.phtml'; 
 ?>
 
@@ -9,7 +8,7 @@ require './src/templates/adminPanel.phtml';
         <tr>
             <th>Pseudonyme</th>
             <th>email</th>
-            <th></th>
+            <th>Suppression</th>
         </tr>
     </thead>
     <tbody>
@@ -22,10 +21,16 @@ for($i=0,$max=count($userArray);$i<$max;$i++){
         <tr>
             <td><?=$userArray[$i]['username']?></td>
             <td><?=$userArray[$i]['email']?></td>
-            <td><a href="">Supprimer l'utilisateur</a></td>
+            <td>
+                <form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/manageUser" method="post">
+                <input type="hidden" name="userId" value=<?=$userArray[$i]['id']?>>
+                <button type="submit" class="deletebtn">Supprimer l'utilisateur</button>
+                </form>
+            </td>
         </tr>
-    </tbody>
+
 <?php
 }
 ?>
+    </tbody>
 </table>

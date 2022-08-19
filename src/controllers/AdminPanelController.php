@@ -22,9 +22,18 @@ class AdminPanelController
     
     public function manageUser(array $get, array $post = null)
     {
-            if($_SESSION['user']['is_admin']==1){
-            echo "Admin connecté !";
-            require "./src/templates/adminUsers.phtml";
+            if($_SESSION['user']['is_admin']==1)
+            {
+                echo "Admin connecté !";
+                // If the admin came from a form, it means that he wanted to delete a user
+                if(!empty($_POST)){
+                    $delUserId=$_POST['userId'];
+                    $userManager= new UserManager();
+                    $userManager->deleteUserById($delUserId);
+                }
+                
+                //require "./src/templates/layout-admin.phtml";
+                require "./src/templates/adminUsers.phtml";
             }
             else{
             echo "Non Admin connecté !";

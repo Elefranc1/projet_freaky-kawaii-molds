@@ -133,7 +133,7 @@
     /**
      * @return DateTime
      */
-    public function getBirthdate(): string
+    public function getBirthdate(): DateTime
     {
         return $this->birthdate;
     }
@@ -141,7 +141,7 @@
     /**
      * @param DateTime $birthdate
      */
-    public function setBirthdate(string $birthdate): void
+    public function setBirthdate(DateTime $birthdate): void
     {
         $this->birthdate = $birthdate;
     }

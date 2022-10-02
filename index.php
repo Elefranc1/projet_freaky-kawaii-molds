@@ -1,6 +1,7 @@
 <?php
 /**
  * @author : Gaellan
+ * @author : Elefranc1
  */
 session_start();
 require "autoload.php";
@@ -43,5 +44,3 @@ catch(Exception $e)
         echo $e->getMessage();
     }
 }
-
-var_dump($_SESSION);

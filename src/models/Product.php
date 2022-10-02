@@ -2,24 +2,27 @@
 /**
  * @author : Elefranc1
  */
-abstract class User
+class Product
 {
     protected int $id;
     
     protected string $label;
 
     protected string $description;
+    
+    protected int $categoryId;
 
     /**
-     * @param string $username
-     * @param string $password
+     * @param string $label
+     * @param string $title
+     * @param int $categoryId
      */
-    public function __construct(string $label, string $description, int $variantId)
+    public function __construct(string $label, string $description, int $categoryId)
     {
         //$this->id = $id;
         $this->label = $label;
         $this->description = $description;
-        $this->variantId = $variantId;
+        $this->categoryId = $categoryId;
     }
     
     /**
@@ -69,6 +72,22 @@ abstract class User
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getCategoryId(): int
+    {
+        return $this->categoryId;
+    }
+
+    /**
+     * @param int $categoryId
+     */
+    public function setCategoryId(int $categoryId): void
+    {
+        $this->categoryId = $categoryId;
     }
     
 }

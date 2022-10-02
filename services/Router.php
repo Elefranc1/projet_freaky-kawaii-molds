@@ -1,6 +1,7 @@
 <?php
 /**
  * @author : Gaellan
+ * @author : Elefranc1
  */
 
 class Router {
@@ -46,7 +47,6 @@ class Router {
         {
             $route["parameter"] = null;
         }
-        
         return $route;
     }
 

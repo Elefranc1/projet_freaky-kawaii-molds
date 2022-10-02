@@ -1,45 +1,102 @@
 <?php
 require './src/templates/layout.phtml';   
-
 ?>
 
 
-<form action="/ProjetFinal/projet_freaky-kawaii-molds/editProfile" method="post">
+
+<h1>Votre profil utilisateur</h1>
+
+<?php
+// If errors were detected during the submit
+if (!empty($errors))
+{
+?>
+<section class=form-errors>
+  <ul>
+    <?php
+    foreach ($errors as $key=>$error)
+    {
+    ?>
+      <li><?=$error?></li>
+    <?php  
+    }
+    ?>
+  </ul>
+</section>
+<?php
+}
+?>
+
+
+<figure>
+	<img id="avatar" src="<?=$avatarUrl?>" alt="image" width="50" height="50">
+	<figcaption></figcaption>
+	</figcaption>
+</figure>
+
+
+<form action="/ProjetFinal/projet_freaky-kawaii-molds/updateUser" method="post" enctype="multipart/form-data">
+            Changement d'avatar:
+              <input type="file" multiple name="fileToUpload" id="fileToUpload">
+              <!--<input type="submit" value="Upload Image" name="submit">-->
+
   <div class="container">
-    <h1>Votre profil utilisateur</h1>
-    <p>Veuillez remplir tous les champs de ce formulaire afin de créer votre propre compte utilisateur.</p>
-    <hr>
+   <hr>
+    <!-- Username -->
     <div>
     <label for="pseudonyme">Pseudonyme</label>
-    <input type="text" value=<?=$user->getUsername();?> name="username">
+    <input type="text" value='<?=$user->getUsername();?>' name="username">
     </div>
     
+    <!-- Email -->
     <div>
     <label for="email">Email</label>
-    <input type="text" value=<?=$user->getEmail();?> name="email">
+    <input type="text" value='<?=$user->getEmail();?>' name="email">
     </div>
     
+    <!-- old password -->
     <div>
-    <label for="password">Mot de passe</label>
+    <label for="password">Ancien Mot de passe</label>
     <input type="password" placeholder="Ancien Mot de passe" name="oldPassword">
     </div>
   
+    <!-- new password -->
     <div>
     <label for="password">Nouveau Mot de passe</label>
     <input type="password" placeholder="Nouveau Mot de passe" name="NewPassword">
     </div>  
     
+    <!-- repeat password -->
     <div>
     <label for="password-repeat">Confirmation Nouveau Mot de Passe</label>
-    <input type="password" placeholder="Confirmation Nouveau Mot de passe" name="newPassword-repeat" required>
+    <input type="password" placeholder="Confirmation Nouveau Mot de passe" name="newPassword-repeat">
     </div>
-    <p>En créant votre compte Freaky Kawaii Molds, vous acceptez nos <a href="#" style="color:dodgerblue">Conditions d'utilisation</a> 
-    et notre <a href="#" style="color:dodgerblue">Politique de confidentialité</a>.</p>
-
+    
+    <!--<div>-->
+    <!--<label for="birthdate">Date de naissance</label>-->
+    <!--<input type="date" value=<=$user->getBirthdate()->format('Y-m-d H:i:s')?> name="birthdate">-->
+    <!--</div>-->
+    
+    <!--<div>-->
+    <!--<label for="avatar">Avatar</label>-->
+    <!--<input type="text" value="<=$user->getMediaId();?>" name="avatar">-->
+    <!--</div>-->
+    
+    <!-- Avatar -->
+    <input type="hidden" value="<?=$user->getMediaId();?>" name="avatar">
+    
+    <div>
+    <label for="about">A propos de moi</label>
+    <textarea id="about" name="about"
+    rows="5" cols="33"><?=$user->getAbout();?></textarea>
+    </div>
+    
+    
     <div class="clearfix">
       <!-- bouton CANCEL à refaire -->
-      <a href="index.php"><button type="button" class="cancelbtn">Cancel</button></a>
-      <button type="submit" class="signupbtn">Sign Up</button>
+      <a href="index.php"><button type="button" class="cancelbtn">Retour</button></a>
+      <button type="submit" class="signupbtn">Enregistrer les modifications</button>
     </div>
   </div>
 </form>
+

@@ -4,7 +4,16 @@
 /signUp AuthenticationController:signUp
 /logout AuthenticationController:logout
 /editUser UserController:editUser
+/updateUser UserController:updateUser
 /admin AdminPanelController:index
 /admin/manageUser AdminPanelController:manageUser
+/admin/createProduct ProductController:createProduct
+/admin/manageProduct AdminPanelController:manageProduct
+/admin/manageProduct/* ProductController:editProduct
+/admin/manageProduct/searchProduct ProductController:searchProduct
+/admin/manageProduct/changePage ProductController:changePageProductAdmin
+/admin/manageProduct/addVariant ProductController:addVariant
+/admin/manageProduct/removeVariant ProductController:removeVariant
+/admin/manageProduct/cancelVariant ProductController:cancelVariant
 /product ProductController:index
 /product/* ProductController:show

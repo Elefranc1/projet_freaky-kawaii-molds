@@ -2,7 +2,7 @@
 /**
  * @author : Elefranc1
  */
-require "./src/managers/UserManager.php";
+require_once "./src/managers/UserManager.php";
 
 class AuthenticationController
 {

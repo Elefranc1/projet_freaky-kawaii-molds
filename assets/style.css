@@ -18,6 +18,7 @@ a {
     color : black;
 }
 
+
 .log-in{                 /* bouton connexion + logo deco */
 color:black;
 position:relative;
@@ -78,6 +79,11 @@ text-decoration:none;
     color:red;
 }
 
+.form-errors{
+    color:red;
+    border: 0.5rem solid red;
+}
+
 .btnLink{
     background: none!important;
     border: none;
@@ -88,4 +94,34 @@ text-decoration:none;
     color: #069;
     text-decoration: underline;
     cursor: pointer;
+}
+
+.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+
+
+
+table {
+    background: rebeccapurple;
+    display: table;
+    height: 400px;
+    column-width: 400px;
+}
+
+td {
+    background: hotpink;
+    display: table-cell;
+    width: 50%;
+}
+
+.productsAdmin {
+    height:500px;
+    width: 800px;
 }

@@ -1,0 +1,53 @@
+<?php
+require './src/templates/adminPanel.phtml'; 
+?>
+
+<label for="search">Rechercher un produit par son nom: </label>
+<input type="text" id="search">
+
+<section class="productsAdmin" id="target">
+    <table>
+    <col style="width:40%">
+	<col style="width:30%">
+	<col style="width:30%">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Catégorie</th>
+            </tr>
+        </thead>
+        <tbody>
+    <?php
+    for($i=0,$max=count($prodCat);$i<$max;$i++){
+    ?>
+            <tr>
+                <td><a href='/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct/<?=$prodCat[$i]['product_id']?>'><?=$prodCat[$i]['product_label']?></a></td>
+                <td><?=$prodCat[$i]['category_label']?></td>
+            </tr>
+    
+    <?php
+    }
+    ?>
+         </tbody>
+
+    </table>
+    
+
+    
+</section>
+<section>
+    <ul class="pagination">
+           <?php
+    for($i=0,$max=$numberOfPages;$i<$max;$i++){
+    ?>
+        <li id=<?='page'.$i+1?>><button><?=$i+1?></button></li>
+    <?php
+    }
+    ?>
+    </ul>
+</section>
+<section>
+<a href='/ProjetFinal/projet_freaky-kawaii-molds/admin/createProduct'>Créer un nouveau produit</a></td>
+            </tr>
+        </tbody>
+</section>

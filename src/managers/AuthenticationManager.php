@@ -17,7 +17,7 @@ class AuthenticationManager
         );
     }
     
-    public function getAllUsers() : array
+    public function getAllUsers() : ?array
     {
         $query = $this->db->prepare('SELECT * FROM users ');
         $query->execute();
@@ -27,7 +27,7 @@ class AuthenticationManager
     }
     
         
-    public function getAllUserUsernames() : array
+    public function getAllUserUsernames() : ?array
     {
         $query = $this->db->prepare('SELECT username FROM users ');
         $query->execute();

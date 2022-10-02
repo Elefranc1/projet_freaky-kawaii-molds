@@ -1,0 +1,76 @@
+<?php
+require './src/templates/adminPanel.phtml'; 
+?>
+
+<h1><?=$product->getLabel()?> </h1>
+
+<!-- Delete the product -->
+<form action="
+/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct" method="post">
+<input type="hidden" value=<?=$product->getId();?> name="delProductId">
+<button type="submit" class="btnLink">Supprimer le produit</button>    
+</form>
+
+<!-- Update the product -->
+<form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct/<?=$product->getId()?>" method="post">
+
+<label>Nom</label>
+<input type="text" value="<?=$product->getLabel();?>" name="updateLabel">
+
+<label for="category-select">Description</label>
+<input type="text" value="<?=$product->getDescription();?>" name="updateDescription">
+
+<br><!-- BR A ENLEVER -->
+<label>Catégorie</label>
+<select name="updateCategoryId" id="category-select">
+<?php
+for($i=0,$max=count($categoriesArray);$i<$max;$i++)
+{
+    ?>
+    <option value="<?=$categoriesArray[$i]['id']?>" 
+    <?php
+    //The default value is the current category of the product
+    if($categoriesArray[$i]['id']==$product->getCategoryId())
+    {
+        ?>
+        selected="selected"
+        <?php
+    }
+    ?>
+>
+    <?=$categoriesArray[$i]['label']?>
+</option>
+<?php
+};
+?>
+</select>
+
+<br><!-- BR A ENLEVER -->
+<label>Versions du produit</label>
+<ul id="variantsList">
+    <?php
+    if(!empty($variantsArray))
+    {
+        for($i=0,$max=count($variantsArray);$i<$max;$i++)
+        {
+        ?>
+        <li>
+        <p><span id="variantLabel<?=$i?>"><?=$variantsArray[$i]['label']?></span>, PRIX : <?=$variantsArray[$i]['price']?> €</p> 
+        <button id="removeVariantId<?=$variantsArray[$i]['id']?>">Supprimer cette variante</button>
+        </li>
+        <?php
+        };
+    }
+        ?>
+</ul>
+    <label>Nouvelle version</label>
+    <input type="text" value="" id="newVariantLabel">
+    <label>Prix</label>
+    <input type="number" step="0.01" value="" id="newVariantPrice">
+    <button id="addVariant">Ajouter cette variante</button>
+
+<br> <!-- A supprimer -->
+<a class="button" href="/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct">Retour</a>
+<button type="submit">Enregistrer les modifications</button>   
+</form>
+

@@ -11,6 +11,4 @@ class HomescreenController
             require "./src/templates/home_screen.phtml";  
     }
     
-
-    
 }

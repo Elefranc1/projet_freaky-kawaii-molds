@@ -8,8 +8,10 @@ require "./src/managers/DBConnect.php";
 require "./src/controllers/HomescreenController.php";
 require "./src/controllers/AuthenticationController.php";
 require "./src/controllers/AdminPanelController.php";
+require "./src/controllers/ProductController.php";
 require "./src/controllers/UserController.php";
 require "./services/Router.php";
+require "./services/FileUploader.php";
 
 $routes = [];
 
@@ -56,6 +58,6 @@ if ($handle) { // if the file exists
 
         $routes[] = $route; // add the new route to the routes array
     }
-
+    
     fclose($handle); // close the file
 }

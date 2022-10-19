@@ -16,6 +16,20 @@ class ProductManager extends DBConnect
         
         return $result;
     }
+
+    // This functions returns every products of a given category
+    public function getAllProductsByCategoryId(int $categoryId) : ?array
+    {
+        $query = $this->db->prepare('SELECT * FROM products where category_id=:category_id');
+        $parameters = [
+        'category_id' => $categoryId
+        ];
+        $query->execute($parameters);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
+    
     
     // This function returns a product found thanks to its id
     public function getProductById(int $id) : ?product
@@ -30,6 +44,8 @@ class ProductManager extends DBConnect
         $product->setId($result['id']);
         return $product;
     }
+
+
     
     // This function creates a product and returns the id of the newly created product
     public function createProduct(product $product) : ?int
@@ -116,11 +132,34 @@ class ProductManager extends DBConnect
         return $result;
     }
     
+    public function getVProductsWithCategoriesByCategoryId(int $categoryId, int $page) : ?array
+    {
+        $offset=($page*10-10);
+        $query = $this->db->prepare('SELECT * FROM product_with_category_name where category_id=:category_id order by product_id DESC LIMIT 10 OFFSET :offset');
+        $query->bindValue(':category_id', (int) $categoryId, PDO::PARAM_INT); 
+        $query->bindValue(':offset', (int) $offset, PDO::PARAM_INT); 
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
     // this function returns the number of products in the database
     public function getNumberOfProducts() : ?int
     {
         $query = $this->db->prepare('SELECT COUNT(*) FROM products;');
         $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result['COUNT(*)'];
+    }
+    
+    // this function returns the number of products in a given category in the database
+    public function getNumberOfProductsByCategoryId(int $categoryId) : ?int
+    {
+        $query = $this->db->prepare('SELECT COUNT(*) FROM products where category_id=:category_id');
+        $parameters = [
+        'category_id' => $categoryId
+        ];
+        $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result['COUNT(*)'];
     }
@@ -134,6 +173,36 @@ class ProductManager extends DBConnect
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    // This function searches product inside a category that matches a given string
+    public function searchProductInCategory(int $categoryId, string $search) : ?array
+    {
+        $query = $this->db->prepare("SELECT * FROM product_with_category_name WHERE product_label like :find and category_id=:category_id ORDER BY product_id DESC LIMIT 10");
+        $query->bindValue('find',$search,PDO::PARAM_STR);
+        $query->bindValue(':category_id', (int) $categoryId, PDO::PARAM_INT); 
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     
+    // This function returns available products to display
+    public function getAllVProductsAvailable() : ?array
+    {
+        $query = $this->db->prepare("SELECT * FROM products_available ORDER BY product_id DESC LIMIT 10");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     
+    // This function returns available products to display
+    public function getAllVProductsAvailableByCategoryId(int $categoryId) : ?array
+    {
+        $query = $this->db->prepare("SELECT * FROM products_available where category_id=:category_id ORDER BY product_id DESC LIMIT 10");
+        $parameters = [
+        'category_id' => $categoryId
+        ];
+        $query->execute($parameters);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }

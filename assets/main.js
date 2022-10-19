@@ -27,9 +27,12 @@ function ajaxJS(type, url, data, response)
 window.addEventListener("DOMContentLoaded", (event) => {
     
     // PAGINATION Admin Pannel Products
+
+    let categoryFilter = document.getElementById("categoryFilter");
     let allPageButtons = document.querySelectorAll("[id^='page']");
-     if(allPageButtons!=null)
+     if(allPageButtons!=null && categoryFilter!=null)
      {
+        let categoryFilterId=categoryFilter.value;
         for (var i = 0; i < allPageButtons.length; i++) 
             {
                 allPageButtons[i].addEventListener('click', function(event) {
@@ -43,10 +46,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 
                 console.log(formDataPage);
                 console.log(pageNumber);
+                console.log(categoryFilterId);
                
                 const optionsPage = {
                     method: 'POST',
-                    body: JSON.stringify({page : pageNumber})
+                    body: JSON.stringify({page : pageNumber, categoryId : categoryFilterId},)
                 };
                 
                 let req= new Request('/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct/changePage', optionsPage)
@@ -69,10 +73,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
     
     
     
-    // SEARCH PRODUCTS
+    // SEARCH PRODUCTS ADMIN
     let input = document.querySelector("#search");
-    if(input!=null)
+    if(input!=null && categoryFilter!=null)
     {
+        let categoryFilterId=categoryFilter.value;
         input.addEventListener('keyup', ()=>{
         // Everytime the user presses a key
         // we retrieve the text written 
@@ -81,7 +86,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         // We create a request object
          let req = new Request('/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct/searchProduct',{
              method: "POST",
-             body: JSON.stringify({textToFind : textFind})
+             body: JSON.stringify({textToFind : textFind, categoryId : categoryFilterId})
          })
          console.log(req);
         
@@ -105,8 +110,33 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
     
    
-    
-
+    // // CATEGORY FILTER ADMIN
+    // let categoryFilter = document.querySelector("#categoryFilter"); 
+    // if(categoryFilter!=null)
+    // {
+    //     categoryFilter.addEventListener('change', ()=>{
+    //     // Everytime the user selects a category
+    //     // we retrieve the value selected 
+    //     let categoryFilterId = document.querySelector("#categoryFilter").value;
+        
+    //     console.log(categoryFilterId);
+        
+    //     // We create a request object
+    //      let req = new Request('/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct/filterByCategory',{
+    //          method: "POST",
+    //          body: JSON.stringify({categoryId : categoryFilterId})
+    //      })
+    //      console.log(req);
+        
+    //     // // We fetch the PHP response
+    //     // fetch(req)
+    //     //     .then(response => response.text())
+    //     //     .then(response => {
+    //     //         document.getElementById("target").innerHTML = response;
+    //     //     })
+        
+    // });
+    // }
     
     
     

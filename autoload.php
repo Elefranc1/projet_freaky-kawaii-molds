@@ -10,6 +10,9 @@ require "./src/controllers/AuthenticationController.php";
 require "./src/controllers/AdminPanelController.php";
 require "./src/controllers/ProductController.php";
 require "./src/controllers/UserController.php";
+require "./src/controllers/ReviewController.php";
+require "./src/controllers/CartController.php";
+require "./src/controllers/OrderController.php";
 require "./services/Router.php";
 require "./services/FileUploader.php";
 

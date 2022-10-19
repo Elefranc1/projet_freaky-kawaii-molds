@@ -1,25 +1,36 @@
 <?php
-
 ?>
 <header>
     <?php
-    //If a user is online, we display his username. Else we display the links to the signIn and signUp forms
+    //If a user is online, we display his username and avatar. Else we display the links to the signIn and signUp forms
             if(isset($_SESSION['user']))
             {
                 echo $_SESSION['user']['username'];
                 echo "<br>";
     ?>
+            
+            <!-- avatar -->
+            <figure>
+            	<img id="avatar" src="<?=$_SESSION['user']['media_url']?>" alt="image" width="50" height="50">
+            	<figcaption></figcaption>
+            </figure>
+            
             <!-- Change profile -->
+            <br>
             <a  href='/ProjetFinal/projet_freaky-kawaii-molds/editUser'>Modifier son profil</a>    
  
+            <!-- Shopping Cart -->
+            <br>
+            <a  href="<?='/ProjetFinal/projet_freaky-kawaii-molds/shoppingCart/'.$_SESSION['user']['id']?>">Mon panier</a>  
+            
+            <!-- Orders History -->
+            <br>
+            <a  href="<?='/ProjetFinal/projet_freaky-kawaii-molds/orderHistory/'.$_SESSION['user']['id']?>">Historique de mes commandes</a>  
             
             <!-- Log out -->
-            <a class="logOut" href="/ProjetFinal/projet_freaky-kawaii-molds/homescreen">
-                <form action="/ProjetFinal/projet_freaky-kawaii-molds/logout" method="post">
-                <button type="submit" class="btnLink">Déconnexion</button>    
-                </form>
-                <p>Se déconnecter</p>
-            </a>
+            <form action="/ProjetFinal/projet_freaky-kawaii-molds/logout" method="post">
+            <button type="submit" class="btnLink">Déconnexion</button>    
+            </form>
     <?php
                 if(($_SESSION['user']['is_admin'] == 1 ))
                 {
@@ -30,21 +41,7 @@
                 
     <?php
                 }
-            
-    ?>
-                <!-- A EFFACER UNE FOIS LE LOGOUT TERMINE -->
-                <div class="logs">
-                    <a class="signIn" href="/ProjetFinal/projet_freaky-kawaii-molds/signIn">
-                        <p>Se connecter</p>
-                    </a>
-                </div>
-                <div>
-                    <a class="signUp" href="/ProjetFinal/projet_freaky-kawaii-molds/signUp">
-                        <p>S'inscrire</p>
-                    </a>
-                </div
-    <?php    
-                
+    
             }
             else
             {
@@ -57,9 +54,6 @@
                     <a class="signUp" href="/ProjetFinal/projet_freaky-kawaii-molds/signUp">
                         <p>S'inscrire</p>
                     </a>
-                </div>
-                <div>
-                    <a class="log-out" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                 </div>
                 <div class="logo">
                     <a href="/ProjetFinal/projet_freaky-kawaii-molds/index.php">

@@ -19,6 +19,17 @@ class VariantManager extends DBConnect
         return $results;
     }
     
+    public function getVariantById(int $id) : ?array
+    {
+        $query = $this->db->prepare('SELECT * FROM variants WHERE id=:id ');
+        $parameters= [
+        'id'=>$id
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
     public function createNewVariant(int $productId, string $label, float $price) : void
     {
         $query = $this->db->prepare('INSERT INTO variants(product_id, label, price) 

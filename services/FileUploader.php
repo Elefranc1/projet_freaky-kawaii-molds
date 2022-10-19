@@ -14,7 +14,6 @@ class FileUploader
     private array $allowedFileTypes = ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG"];
     private int $maxFileSize = 2000000; // 2 Mo
     
-    
     public function setUploadRepo(string $uploadRepo) : self
     {
         $this->uploadRepo = $uploadRepo;
@@ -32,8 +31,7 @@ class FileUploader
     {
         $uploadOk = 1;
         // vérifier que le fichier n'est pas trop gros
-        var_dump($_FILES["fileToUpload"]["size"]);
-        if ($_FILES["fileToUpload"]["size"] > $this->maxFileSize) {
+        if ($fileSize > $this->maxFileSize) {
   echo "Désolé, votre fichier est trop volumineux. (2Mo max)";
   $uploadOk = 0;
     }

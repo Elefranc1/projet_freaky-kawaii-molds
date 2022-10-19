@@ -1,0 +1,36 @@
+<?php
+require './src/templates/layout.phtml';   
+?>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Numéro de commande</th>
+            <th>Total</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php
+
+for($i=0,$max=count($userOrders);$i<$max;$i++){
+// formatting the date before displaying it
+$date=date("d/m/Y",strtotime($userOrders[$i]['order_date']));
+?>
+        
+        <tr>
+            
+                
+                <td><a href="<?='/ProjetFinal/projet_freaky-kawaii-molds/orderHistory/details/'.$userOrders[$i]['id']?>"> Commande numéro <?=$userOrders[$i]['id']?></a></td>
+                <td><?=$userOrders[$i]['total_price']?>  €</td>
+                <td><?=$date?></td>
+          
+        </tr>
+   
+
+<?php
+}
+?>
+    </tbody>
+</table>

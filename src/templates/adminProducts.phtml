@@ -2,8 +2,54 @@
 require './src/templates/adminPanel.phtml'; 
 ?>
 
+
+
 <label for="search">Rechercher un produit par son nom: </label>
 <input type="text" id="search">
+
+<?php
+if(isset($categories) && !empty($categories))
+{
+?>
+    <form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct" method="post">  
+    <label for="categoryFilter">Filtrer par catégorie : </label>
+    <select id="categoryFilter" name="categorySelected" onchange='this.form.submit()'>
+    <option value=0
+    <?php
+    if($categoryIdFilter==0)
+    {
+    ?>
+    selected='selected'
+    <?php
+    }
+    ?>
+    >Aucune</option>
+    <?php
+    for($i=0,$max=count($categories);$i<$max;$i++)
+    {
+    ?>    
+         
+        <option value=<?=$categories[$i]['id']?> 
+        <?php
+        if($categories[$i]['id']==$categoryIdFilter)
+        {
+        ?>
+        selected='selected'
+        <?php
+        }
+        ?>
+        > <?=$categories[$i]['label']?>   
+        </option>  
+    <?php
+    }
+    ?>
+    </select>  
+    <!--button type="submit">Appliquer</button> -->
+    </form>  
+<?php
+}
+?>
+
 
 <section class="productsAdmin" id="target">
     <table>

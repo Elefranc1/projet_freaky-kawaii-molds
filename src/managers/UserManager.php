@@ -72,6 +72,7 @@ class UserManager extends DBConnect
             $user = new User($userArray[0]['username'], $userArray[0]['password'], $userArray[0]['email']);
             $user->setId($userArray[0]['id']);
             $user->setIsAdmin($userArray[0]['is_admin']);
+            $user->setMediaId($userArray[0]['media_id']);
             return $user;
         }
         else

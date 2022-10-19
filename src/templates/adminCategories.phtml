@@ -1,0 +1,51 @@
+<?php
+require './src/templates/adminPanel.phtml'; 
+?>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Catégorie</th>
+            <th>Nombre de produits / Suppression</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php
+
+
+for($i=0,$max=count($categoryArray);$i<$max;$i++){
+?>
+        <tr>
+            <td><?=$categoryArray[$i]['label']?></td>
+            <?php
+            if($categoryArray[$i]['cnt']!=NULL){
+            ?>
+            <td><?=$categoryArray[$i]['cnt']?></td>
+            <?php
+            }
+            else
+            {
+            ?>
+            <td>
+                <form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/manageCategories" method="post">
+                <input type="hidden" name="delCategoryId" value=<?=$categoryArray[$i]['category_id']?>>
+                0 <button type="submit" class="deletebtn">Supprimer</button>
+                </form>
+            </td>
+            <?php
+            }
+            ?>
+        </tr>
+
+<?php
+}
+?>
+    </tbody>
+</table>
+
+<form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/manageCategories" method="post">
+<label>Nouvelle catégorie</label>
+<input type="text" value="" name="newCategory">
+<button type="submit">Ajouter</button>
+</form>

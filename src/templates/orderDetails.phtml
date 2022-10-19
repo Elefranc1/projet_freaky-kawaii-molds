@@ -1,0 +1,39 @@
+<?php
+require './src/templates/layout.phtml';   
+?>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Nom du produit</th>
+            <th>Couleur</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php
+
+for($i=0,$max=count($orderDetails);$i<$max;$i++){
+// We retrieve the label for each product
+$product = $productManager->getProductById($orderDetails[$i]['product_id']);
+?>
+        
+        <tr>
+                <td><?=$product->getlabel()?></td>
+                <td><?=$orderDetails[$i]['variant_label']?></td>
+                <td><?=$orderDetails[$i]['quantity']?></td>
+                <td><?=$orderDetails[$i]['quantity']*$orderDetails[$i]['price']?>  € (Prix unitaire <?=$orderDetails[$i]['price']?> € )</td>
+          
+        </tr>
+   
+
+<?php
+}
+?>
+    </tbody>
+</table>
+
+<br> <!-- A supprimer -->
+<a class="button" href="<?='/ProjetFinal/projet_freaky-kawaii-molds/orderHistory/'.$userId?>">Retour</a>

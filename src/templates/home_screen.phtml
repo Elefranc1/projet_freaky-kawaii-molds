@@ -1,12 +1,51 @@
 <?php
 require './src/templates/layout.phtml';   
-
 ?>
 
 <h1>Ecran d'accueil</h1>
 <br>
-<a href="/ProjetFinal/projet_freaky-kawaii-molds/page1">Lien vers la page de test</a>
 <br>
+
+<h2>Catégories</h2>
+<nav class="admin_menu">
+    <?php
+    if(!empty($categories))
+    {
+        for($i=0,$max=count($categories);$i<$max;$i++)
+        {
+            $string="/ProjetFinal/projet_freaky-kawaii-molds/category/".$categories[$i]['id'];       
+    ?>
+            <div class="nav_element">
+                <a href=<?=$string?>> <!--link Manage Products (Create, Update, Delete)-->
+                    <p><?=$categories[$i]['label']?></p>
+                </a>
+            </div>
+    <?php    
+        }
+        
+     
+    }
+    ?>
+</nav>
+
+ <main class="container">
+        <section class="articles" id="target">
+            <?php foreach($availableProducts as $availableProduct): 
+            $string="/ProjetFinal/projet_freaky-kawaii-molds/product/".$availableProduct['product_id']?>
+				<article>
+    				<h3><?= htmlspecialchars($availableProduct['product_label']) ?></h3>				    
+				    <a href=<?=$string?>>
+    			 		<figure>
+    						<img src="<?=$availableProduct['media_url']?>" alt="image">
+    						<figcaption>
+    						</figcaption>
+    					</figure>
+    				</a>
+				</article>
+            <?php endforeach; ?>
+        </section>
+    </main>
+
 
 </div>
 </body>

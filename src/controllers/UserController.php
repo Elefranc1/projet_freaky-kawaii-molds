@@ -96,7 +96,7 @@ class UserController
                 }
                 
               // Avatar uploaded 
-                if(isset($_FILES["fileToUpload"]))
+                if(isset($_FILES["fileToUpload"]) && $_FILES["fileToUpload"]["size"]!=0)
                 {
                     
                     
@@ -116,7 +116,8 @@ class UserController
                     $updatedUser->setMediaId($mediaId);
                     }
                     
-                    var_dump($_POST);
+
+                    
                 }
                 
             // Update the user in DB
@@ -126,6 +127,10 @@ class UserController
             $user=$userManager->getUserById($userId);
             
             $avatarUrl=$mediaManager->getUrlByMediaId($user->getMediaId());
+            
+            //We also update the session to immediately see the new avatar in the header if it has been changed
+            $_SESSION["user"]["media_url"] = $avatarUrl;
+                
             require "./src/templates/userProfile.phtml";
         }
     }

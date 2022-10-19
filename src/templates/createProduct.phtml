@@ -4,13 +4,37 @@ require './src/templates/adminPanel.phtml';
 
 <h1>NOUVEAU PRODUIT</h1>
 
+<?php
+// If errors were detected during the submit
+if (!empty($errors))
+{
+?>
+<section class=form-errors>
+  <ul>
+    <?php
+    foreach ($errors as $key=>$error)
+    {
+    ?>
+      <li><?=$error?></li>
+    <?php  
+    }
+    ?>
+  </ul>
+</section>
+<?php
+}
+?>
 
 <!-- Update the product -->
-<form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/createProduct" method="post">
+<form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/createProduct" method="post" enctype="multipart/form-data">
+Image principale du produit:
+<input type="file" multiple name="fileToUpload" id="fileToUpload">
 
+<br><!-- BR A ENLEVER -->
 <label>Veuillez entrer le Nom du produit</label>
 <input type="text" value="" name="newLabel">
 
+<br><!-- BR A ENLEVER -->
 <label for="category-select">Veuillez entrer une description du produit</label>
 <input type="text" value="" name="newDescription">
 

@@ -1,0 +1,92 @@
+<?php
+require './src/templates/adminPanel.phtml'; 
+?>
+
+
+<?php 
+if(!empty($_SESSION['cart']))
+{
+?>
+    <section id="shoppingCartTable">
+    <table>
+    
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Option</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+    <?php
+    foreach($_SESSION['cart'] as $key=>$selectedArticle): 
+    ?>
+            <tr>
+                <td>
+                    <figure>
+                    	<img src=" <?=$selectedArticle['productMediaUrl']?>" alt="image" width="170" height="135">
+                    	<figcaption></figcaption>
+                    </figure>
+                    <p><?=$selectedArticle['productLabel']?></p>
+                </td>
+                <td><?=$selectedArticle['variantLabel']?> - <?=$selectedArticle['variantPrice']?> €</td>
+                <td><?=$selectedArticle['quantitySelected']?></td>
+                <td><?=$selectedArticle['quantitySelected']*$selectedArticle['variantPrice']?> €</td>
+                <td>
+                    <form action="<?='/ProjetFinal/projet_freaky-kawaii-molds/shoppingCart/'.$_SESSION['user']['id']?>" method="post">
+                    <input type="hidden" name="deleteArticle" value="<?=$key?>">
+                    <button type="submit" class="deletebtn">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+    <?php endforeach; ?>
+        </tbody>
+    </table>
+    
+    <form action="<?='/ProjetFinal/projet_freaky-kawaii-molds/orderHistory/'.$_SESSION['user']['id']?>" method="POST">
+        <?php
+        // total price 
+        $totalPrice=0;
+        $productArray=[];
+        
+        foreach($_SESSION['cart'] as $key=>$selectedArticle): 
+        $totalPrice=$totalPrice+($selectedArticle['quantitySelected']*$selectedArticle['variantPrice']);
+        $productArray[]=[
+                        "productId" => $selectedArticle['productId'],
+                        "productLabel" => $selectedArticle['productLabel'],
+                        "productMediaUrl" => $selectedArticle['productMediaUrl'],
+                        "variantId" => $selectedArticle['variantId'],
+                        "variantLabel" => $selectedArticle['variantLabel'],
+                        "variantPrice" => $selectedArticle['variantPrice'],
+                        "quantitySelected" => $selectedArticle['quantitySelected']
+                    ];
+        
+        
+        ?>
+        <?php endforeach; ?>
+        <input type="hidden" value="<?=$totalPrice?>" name="totalPrice">
+        <?php foreach($productArray as $key=>$selectedProduct): ?>
+        <input type="hidden" name="productsId[]" value="<?=$selectedProduct['productId']?>">
+        <input type="hidden" name="productsLabel[]" value="<?=$selectedProduct['productLabel']?>">
+        <input type="hidden" name="variantsPrice[]" value="<?=$selectedProduct['variantPrice']?>">
+        <input type="hidden" name="variantsLabel[]" value="<?=$selectedProduct['variantLabel']?>">
+        <input type="hidden" name="quantitiesSelected[]" value="<?=$selectedProduct['quantitySelected']?>">
+        <?php endforeach; ?>
+        <button type="submit">Finaliser la commande</button>
+    </form>
+    
+    
+    </section>
+<?php
+}
+else
+{
+?>
+<p>Votre panier est vide</p>
+<?php
+}
+?>
+

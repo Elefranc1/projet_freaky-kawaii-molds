@@ -13,8 +13,6 @@ require './src/templates/adminPanel.phtml';
     </thead>
     <tbody>
 <?php
-$userManager = new UserManager();
-$userArray= $userManager->getAllNonAdminUsers();
 
 for($i=0,$max=count($userArray);$i<$max;$i++){
 ?>

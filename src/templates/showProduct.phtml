@@ -1,0 +1,123 @@
+<?php
+require './src/templates/adminPanel.phtml'; 
+$string="/ProjetFinal/projet_freaky-kawaii-molds/createReview/".$product->getId();
+if(!empty($writtenReview))
+{
+    $reviewString="/ProjetFinal/projet_freaky-kawaii-molds/editReview/".$writtenReview['id'];
+}
+?>
+
+<h1><?=$product->getLabel()?> </h1>
+
+
+<!-- Display the product -->
+
+<!-- Main image of the product -->
+<h2>Image principale</h2>
+<figure>
+	<img id="productMainPicture" src="<?=$mainMediaUrl?>" alt="image" width="300" height="500">
+	<figcaption></figcaption>
+</figure>
+<br><!-- BR A ENLEVER -->
+<h2>Nom</h2>
+<p><?=$product->getLabel();?></p>
+
+<br><!-- BR A ENLEVER -->
+<h2>Description</h2>
+<p><?=$product->getDescription();?></p>
+
+<br><!-- BR A ENLEVER -->
+<h2>Catégorie</h2>
+<p><?=$category['label']?></p>
+
+<br><!-- BR A ENLEVER -->
+<?php
+if(!empty($variantsArray) && isset($_SESSION['user']))
+    {
+    ?>
+    <h2>Achat</h2>
+    <form action="/ProjetFinal/projet_freaky-kawaii-molds/shoppingCart/<?=$_SESSION['user']['id']?>" method="post">
+    <label>Couleur</label>
+    <!-- Variant selector -->
+    <select id="variantIdSelect" name="variantSelected">
+        <?php
+            echo "<option value selected>Sélectionner une option</option>";
+            for($i=0,$max=count($variantsArray);$i<$max;$i++)
+            {
+            ?>
+            <option id="variantId<?=$i?>" value="<?=$variantsArray[$i]['id']?>"><?=$variantsArray[$i]['label']?> ( <?=$variantsArray[$i]['price']?> €) </option>
+            <?php
+            };
+        ?>
+    </select>
+    <br>
+     <!-- Quantity selector -->
+    <label>Quantité</label>
+    <select id="quantitySelect" name="quantitySelected">
+        <?php
+            echo "<option value='1' selected>1</option>";
+            for($i=2,$max=10;$i<=$max;$i++)
+            {
+            ?>
+            <option value="<?=$i?>"><?=$i?></option>
+            <?php
+            };
+        ?>        
+    </select>
+    <input type="hidden" name="productId" value="<?=$product->getId()?>">
+    <input type="hidden" name="productLabel" value="<?=$product->getLabel()?>">
+    <input type="hidden" name="productMediaUrl" value="<?=$mainMediaUrl?>">
+    <br>
+    <button type="submit">Ajouter au Panier</button>   
+    </form>
+    
+    <?php
+    }
+    ?>
+
+
+<!-- REVIEW -->
+<h2>Evaluations</h2>
+
+<?php
+if(empty($reviews))
+{
+?>
+<p>Aucune évaluation pour l'instant</p>
+    <?php if(isset($_SESSION['user']))
+    {
+    ?>
+    <a href=<?=$string?>>Soyez le premier à donner votre avis !</a>
+    <?php
+    }
+}
+else
+{
+    if(!empty($writtenReview))
+    {
+    ?> 
+    <a href=<?=$reviewString?>>Vous avez déjà évaluez ce produit ! Voir votre évaluation</a>    
+    <?php
+    }
+    else
+    {
+    ?>
+    <a href=<?=$string?>>Ajouter votre évaluation du produit</a>        
+    <?php
+    }
+?>
+    <main class="container">
+        <section class="reviews">
+            <?php foreach($reviews as $review): 
+            $date=date("d/m/Y",strtotime($review["submission_date"]));
+            ?>
+            <hr>
+            <p><strong><?=$review['username']?></strong> a commenté le <?=$date?></p>
+            <p>Note : <span><?=$review['score']?></span>/5 </p>
+            <p><?=$review['text']?></p>
+            <?php endforeach; ?>
+        </section>
+    </main>
+<?php
+}
+?>

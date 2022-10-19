@@ -4,19 +4,29 @@ require './src/templates/adminPanel.phtml';
 
 <h1><?=$product->getLabel()?> </h1>
 
-<!-- Delete the product -->
-<form action="
-/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct" method="post">
-<input type="hidden" value=<?=$product->getId();?> name="delProductId">
-<button type="submit" class="btnLink">Supprimer le produit</button>    
-</form>
+
+
+
+
 
 <!-- Update the product -->
-<form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct/<?=$product->getId()?>" method="post">
+<form action="/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct/<?=$product->getId()?>" method="post" enctype="multipart/form-data">
 
+
+<!-- Main image of the product -->
+<label>Image principale</label>
+<figure>
+	<img id="productMainPicture" src="<?=$mainMediaUrl?>" alt="image" width="300" height="500">
+	<figcaption></figcaption>
+</figure>
+Changer l'image principale:
+<input type="file" name="mainFileToUpload" id="mainFileToUpload">
+
+<br><!-- BR A ENLEVER -->
 <label>Nom</label>
 <input type="text" value="<?=$product->getLabel();?>" name="updateLabel">
 
+<br><!-- BR A ENLEVER -->
 <label for="category-select">Description</label>
 <input type="text" value="<?=$product->getDescription();?>" name="updateDescription">
 
@@ -74,3 +84,10 @@ for($i=0,$max=count($categoriesArray);$i<$max;$i++)
 <button type="submit">Enregistrer les modifications</button>   
 </form>
 
+
+<!-- Delete the product -->
+<form action="
+/ProjetFinal/projet_freaky-kawaii-molds/admin/manageProduct" method="post">
+<input type="hidden" value=<?=$product->getId();?> name="delProductId">
+<button type="submit" class="btnLink">Supprimer le produit</button>    
+</form>

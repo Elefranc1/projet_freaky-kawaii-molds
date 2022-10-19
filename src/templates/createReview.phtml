@@ -1,0 +1,53 @@
+<?php
+require './src/templates/layout.phtml'; 
+$returnString="/ProjetFinal/projet_freaky-kawaii-molds/product/".$product->getId();
+$reviewPage="/ProjetFinal/projet_freaky-kawaii-molds/createReview/".$product->getId();
+// var_dump($errors);
+?>
+
+<h1>Nouvelle évaluation du produit : <strong><?=$product->getLabel()?></strong></h1>
+
+<?php
+// If errors were detected during the submit
+if (!empty($errors))
+{
+?>
+<section class=form-errors>
+  <ul>
+    <?php
+    foreach ($errors as $key=>$error)
+    {
+    ?>
+      <li><?=$error?></li>
+    <?php  
+    }
+    ?>
+  </ul>
+</section>
+<?php
+}
+?>
+
+<form action=<?=$reviewPage?> method="post" enctype="multipart/form-data">
+<input type="hidden" name="reviewPage" value=<?=$reviewPage?>>
+<input type="hidden" name="productPage" value=<?=$returnString?>>
+    
+<h3>Note sur 5:  <input type="number" id="reviewScore" name="reviewScore" min="0" max="5" 
+<?php 
+if(!empty($_POST['reviewScore'])) 
+{
+echo "value=\"" . $_POST["reviewScore"] . "\"";
+} 
+?> 
+>
+</h3>
+
+<br><!-- BR A ENLEVER -->
+<label>Votre commentaire :</label>
+<br>
+    <textarea id="reviewText" name="reviewText"
+    rows="5" cols="33"><?php if(!empty($_POST['reviewText'])){echo $_POST["reviewText"];} ?></textarea>
+<br>
+<a class="button" href=<?=$returnString?>>Annuler</a>
+<button type="submit">Enregistrer l'évaluation</button>   
+</form>

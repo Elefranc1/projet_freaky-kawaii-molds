@@ -32,14 +32,23 @@ class AuthenticationController
                 // If the password matches, we go back to the homescreen and store the user infos in sesion
                 if(password_verify($password, $DBUserPassword)){
                     $_GET['path']=null; // We set 'path'=NULL to display the nav and header again
-
+                        
+                        //we retrieve the url of the user's avatar
+                        $mediaId=$DBuser->getMediaId();
+                        $mediaManager = new MediaManager();
+                        
                         //we stock in $_SESSION relevant informations 
                         $_SESSION["user"] = [
                             "id" => $DBuser->getId(),
                             "username" => $DBuser->getUsername(),
-                            "is_admin" => $DBuser->getIsAdmin()
+                            "is_admin" => $DBuser->getIsAdmin(),
+                            "media_url" => $mediaManager->getUrlByMediaId($mediaId)
                         ];
-                    require "./src/templates/home_screen.phtml"; 
+                        
+                        //we also initialize the shopping cart for later
+                        $_SESSION["cart"] = [];
+                        
+                    header('location:/ProjetFinal/projet_freaky-kawaii-molds/'); 
                 }
                 else{
                 // else we stay in the signIn form with an error message
@@ -158,13 +167,10 @@ class AuthenticationController
     function logout(array $get, array $post=null) : void
     {
         if(isset($_SESSION['user'])){
-            var_dump($_SESSION);
             unset($_SESSION['user']);
-            var_dump($_SESSION);
         }
         
         // we redirect the user who looged out to the homescreen
-        // require './src/templates/home_screen.phtml'; 
         header('Location:/ProjetFinal/projet_freaky-kawaii-molds/');
     }
 
